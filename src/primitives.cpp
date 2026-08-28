@@ -3,8 +3,11 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <fstream>
+#include <memory>
 #include <vector>
 #include <limits>
+#include <windows.h>
 
 double to_radians(Degrees degrees)
 {
@@ -47,7 +50,7 @@ std::vector<Degrees> to_degrees(std::vector<double>& data)
 
 std::ostream& operator<<(std::ostream& os, const Degrees& data)
 {
-    os << data.degrees << "\370 "
+    os << data.degrees << "\370"
         << data.minutes << "' "
         << data.seconds << "''";
     return os;
@@ -131,19 +134,44 @@ std::vector<std::string> data_to_string(const std::vector<Degrees>& data)
 void Problem::input_ellipsoid()
 {
     double b, e2, e_2;
-    std::cout << "Параметры эллипсоида." << std::endl;
-    std::cout << "Введите малую полуось эллипсоида (м): b = ";
+    out << "Параметры эллипсоида." << std::endl;
+    out << "Введите малую полуось эллипсоида (м): b = ";
     std::cin >> b;
-    std::cout << "Введите квадрат эксцентриситета: e^2 = ";
+    out << StreamType::FileOnly << b << std::endl << StreamType::Both;
+    out << "Введите квадрат эксцентриситета: e^2 = ";
     std::cin >> e2;
-    std::cout << "Введите квадрат второго эксцентриситета: (e')^2 = ";
+    out << StreamType::FileOnly << e2 << std::endl << StreamType::Both;
+    out << "Введите квадрат второго эксцентриситета: (e')^2 = ";
     std::cin >> e_2;
+    out << StreamType::FileOnly << e_2 << std::endl << StreamType::Both;
 
     this->ellipsoid = Ellipsoid{b, e2, e_2};
 }
 
-Problem::Problem()
+void Problem::set_output()
 {
+    std::cout << "Хотите записать результаты в файл? y - да, n - нет: ";
+    std::string ans;
+    std::cin >> ans;
+
+    while (ans != "y" && ans != "n")
+    {
+        std::cout << "Хотите записать результаты в файл? y - да, n - нет: ";
+        std::cin >> ans;
+    }
+
+    if (ans == "y")
+    {
+        std::string filename;
+        std::cout << "Введите название файла: ";
+        std::cin >> filename;
+        out.enableFileLogging(filename);
+    }
+}
+
+void Problem::init()
+{
+    set_output();
     input_ellipsoid();
 }
 
@@ -214,4 +242,67 @@ Coefficients ProblemMath::calc_coefficients(const Way& way, const Ellipsoid& ell
             return ProblemMath::calc_coefficients_accurate(ellipsoid, cos2_A0);
     }
     return Coefficients{0, 0, 0};
+}
+
+// КОСТЫЛЬ ДЛЯ ПЕРЕВОДА В 1251
+std::string StreamSplitter::Cp1125ToCp1251(const std::string& cp1125Text) {
+    int wideSize = MultiByteToWideChar(866, 0, cp1125Text.c_str(), -1, nullptr, 0);
+    if (wideSize <= 0) return "";
+    
+    std::wstring wide(wideSize, L'\0');
+    MultiByteToWideChar(866, 0, cp1125Text.c_str(), -1, wide.data(), wideSize);
+    wide.pop_back();
+    
+    int cp1251Size = WideCharToMultiByte(1251, 0, wide.c_str(), -1, nullptr, 0, nullptr, nullptr);
+    if (cp1251Size <= 0) return "";
+    
+    std::string result(cp1251Size, '\0');
+    WideCharToMultiByte(1251, 0, wide.c_str(), -1, result.data(), cp1251Size, nullptr, nullptr);
+    result.pop_back();
+    
+    return result;
+}
+
+// КОСТЫЛЬ ДЛЯ ПЕРЕВОДА В 1251
+void StreamSplitter::SaveAsWindows1251(const std::stringstream& cp1125Text) {
+    std::string s = cp1125Text.str();
+    std::string cp1251Text = Cp1125ToCp1251(s);
+    file->write(cp1251Text.c_str(), cp1251Text.size());
+}
+
+void StreamSplitter::enableFileLogging(const std::string& filename) {
+    file = std::make_unique<std::ofstream>(filename, std::ios::app | std::ios::binary);
+    if (file->is_open()) {
+        writeToFile = true;
+        this->filename = filename;
+    } else {
+        std::cout << "Ошибка при открытии файла: " << filename << std::endl;
+    }
+}
+
+void StreamSplitter::disableFileLogging() {
+    if (file && file->is_open()) {
+        file->flush();
+        file->close();
+    }
+    file.reset();
+    writeToFile = false;
+}
+
+StreamSplitter& StreamSplitter::operator<<(StreamType stream_type) {
+    writeToConsole = stream_type == StreamType::FileOnly ? false : true;
+    writeToFile = stream_type == StreamType::ConsoleOnly ? false : true;
+    return *this;
+}
+
+StreamSplitter& StreamSplitter::operator<<(std::ostream& (*manip)(std::ostream&)) {
+    if (writeToConsole) {
+        console << manip;
+    }
+    if (writeToFile && file && file->is_open()) {
+        std::stringstream ss;
+        ss << manip;
+        SaveAsWindows1251(ss);
+    }
+    return *this;
 }

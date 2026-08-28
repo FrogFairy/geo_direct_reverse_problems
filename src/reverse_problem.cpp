@@ -5,28 +5,40 @@
 #include <vector>
 #include <utility>
 
+void ReverseProblem::input_ellipsoid()
+{
+    out << "Обратная задача." << std::endl;
+    Problem::input_ellipsoid();
+}
+
 void ReverseProblem::input_data(ReverseState& state) 
 {
     Degrees B1, B2, L1, L2;
     
-    std::cout << "Входные данные." << std::endl;
-    std::cout << "Введите широту начальной точки (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): B1 = ";
+    out << "Обратная задача." << std::endl;
+    out << "Входные данные." << std::endl;
+    out << "Введите широту начальной точки (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): B1 = ";
     std::cin >> B1;
-    std::cout << "Введите широту конечной точки (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): B2 = ";
+    out << StreamType::FileOnly << B1 << std::endl << StreamType::Both;
+    out << "Введите широту конечной точки (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): B2 = ";
     std::cin >> B2;
-    std::cout << "Введите долготу начальной точки (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): L1 = ";
+    out << StreamType::FileOnly << B2 << std::endl << StreamType::Both;
+    out << "Введите долготу начальной точки (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): L1 = ";
     std::cin >> L1;
-    std::cout << "Введите долготу конечной точки (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): L2 = ";
+    out << StreamType::FileOnly << L1 << std::endl << StreamType::Both;
+    out << "Введите долготу конечной точки (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): L2 = ";
     std::cin >> L2;
+    out << StreamType::FileOnly << L2 << std::endl << StreamType::Both;
 
-    std::cout << "Выберите способ подсчета коэффициентов A, B и C." << std::endl;
-    std::cout << "0 - экономизация и отбрасывание незначительных коэффициентов (как у Морозова)" << std::endl;
-    std::cout << "1 - экономизация без отбрасывания" << std::endl;
-    std::cout << "2 - сумма ряда до 100 члена" << std::endl;
+    out << "Выберите способ подсчета коэффициентов A, B и C." << std::endl;
+    out << "0 - экономизация и отбрасывание незначительных коэффициентов (как у Морозова)" << std::endl;
+    out << "1 - экономизация без отбрасывания" << std::endl;
+    out << "2 - сумма ряда до 100 члена" << std::endl;
 
     int w;
-    std::cout << "Введите цифру от 0 до 2: ";
+    out << "Введите цифру от 0 до 2: ";
     std::cin >> w;
+    out << StreamType::FileOnly << w << std::endl << StreamType::Both;
     Way way = static_cast<Way>(w);
 
     Point point1{to_radians(B1), to_radians(L1), 0};
@@ -137,7 +149,7 @@ void ReverseProblem::calc_problem(ReverseState& state)
     state.A = coeffs.A;
     state.B_ = 2 / cos2_A0 * coeffs.B;
     state.C_ = 2 / std::pow(cos2_A0, 2) * coeffs.C;
-    std::cout << cos2_A0 << " " << coeffs.C << std::endl;
+    out << cos2_A0 << " " << coeffs.C << std::endl;
 
     state.y = (std::pow(cos2_A0, 2) - 2 * std::pow(state.x.back(), 2)) * state.cos_sigma.back();
     state.s = state.A * state.sigma.back() + (state.B_ * state.x.back() + state.C_ * state.y) * state.sin_sigma.back();
@@ -168,41 +180,41 @@ void ReverseProblem::calc_problem(ReverseState& state)
 
 void ReverseProblem::output_header(int size_col, int num_cols)
 {
-    std::cout << alignment("Величина", size_col, '<') << "|"
+    out << alignment("Величина", size_col, '<') << "|"
                 << alignment("Приближения", size_col * num_cols + num_cols - 1) << "|" << std::endl;
-    std::cout << std::string(size_col + 1 + size_col * num_cols + num_cols, '-') << std::endl;
-    std::cout << std::string(size_col, ' ') << "|";
+    out << std::string(size_col + 1 + size_col * num_cols + num_cols, '-') << std::endl;
+    out << std::string(size_col, ' ') << "|";
     for (int i = 1; i <= num_cols; ++i)
     {
-        std::cout << alignment(std::to_string(i), size_col) << "|";
+        out << alignment(std::to_string(i), size_col) << "|";
     }
-    std::cout << std::endl;
-    std::cout << std::string(size_col + 1 + size_col * num_cols + num_cols, '-') << std::endl;
+    out << std::endl;
+    out << std::string(size_col + 1 + size_col * num_cols + num_cols, '-') << std::endl;
 }
 
 void ReverseProblem::output_row(const std::string& name, const std::vector<std::string>& data, 
                                 int size_col, int num_cols)
 {
-    std::cout << alignment(name, size_col, '<') << "|";
+    out << alignment(name, size_col, '<') << "|";
     for (int i = 0; i < num_cols; ++i)
     {
-        std::cout << alignment(data[i], size_col) << "|";
+        out << alignment(data[i], size_col) << "|";
     }
-    std::cout << std::endl;
+    out << std::endl;
 }
 
 void ReverseProblem::output_result(ReverseState& state)
 {
-    std::cout << "Выходные данные." << std::endl;
-    std::cout << "l = " << state.l << std::endl;
-    std::cout << "sin(u1) = " << state.sin_u1 << std::endl;
-    std::cout << "cos(u1) = " << state.cos_u1 << std::endl;
-    std::cout << "sin(u2) = " << state.sin_u2 << std::endl;
-    std::cout << "cos(u2) = " << state.cos_u2 << std::endl;
-    std::cout << "a1 = " << state.a1 << std::endl;
-    std::cout << "a2 = " << state.a2 << std::endl;
-    std::cout << "b1 = " << state.b1 << std::endl;
-    std::cout << "b2 = " << state.b2 << std::endl;
+    out << "Выходные данные." << std::endl;
+    out << "l = " << state.l << std::endl;
+    out << "sin(u1) = " << state.sin_u1 << std::endl;
+    out << "cos(u1) = " << state.cos_u1 << std::endl;
+    out << "sin(u2) = " << state.sin_u2 << std::endl;
+    out << "cos(u2) = " << state.cos_u2 << std::endl;
+    out << "a1 = " << state.a1 << std::endl;
+    out << "a2 = " << state.a2 << std::endl;
+    out << "b1 = " << state.b1 << std::endl;
+    out << "b2 = " << state.b2 << std::endl;
 
     int size_col = 25;
     int num_cols = state.delta.size();
@@ -236,16 +248,17 @@ void ReverseProblem::output_result(ReverseState& state)
     output_row("delta", data_to_string(state.delta), size_col, num_cols);
 #endif
 
-    std::cout << "A = " << state.A << std::endl;
-    std::cout << "B' = " << state.B_ << std::endl;
-    std::cout << "C' = " << state.C_ << std::endl;
-    std::cout << "y = " << state.y << std::endl;
-    std::cout << "s = " << state.s << std::endl;
-    std::cout << "A2 = " << to_degrees(state.A2);
+    out << "A = " << state.A << std::endl;
+    out << "B' = " << state.B_ << std::endl;
+    out << "C' = " << state.C_ << std::endl;
+    out << "y = " << state.y << std::endl;
+    out << "s = " << state.s << std::endl;
+    out << "A2 = " << to_degrees(state.A2);
 #ifdef DEBUG
-    std::cout << " = " << state.A2 << " рад ";
+    out << " = " << state.A2 << " рад ";
 #endif
-    std::cout << std::endl;
+    out << std::endl;
+    out << StreamType::FileOnly << std::endl << StreamType::Both;
 }
 
 

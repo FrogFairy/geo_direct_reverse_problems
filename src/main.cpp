@@ -25,14 +25,13 @@ int main()
         if (command == "\\direct")
         {
             DirectProblem problem;
+            problem.init();
             problem.solving_problem();
         } else if (command == "\\reverse")
         {
             ReverseProblem problem;
+            problem.init();
             problem.solving_problem();
-        } else if (command == "\\quit")
-        {
-            break;
         } else
         {
             help();

@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <fstream>
+#include <memory>
 #include <vector>
 #include <limits>
 
@@ -52,18 +54,66 @@ struct Coefficients
     double C;
 };
 
+enum class StreamType
+{
+    FileOnly,
+    ConsoleOnly,
+    Both
+};
+
+struct StreamSplitter {
+private:
+    std::ostream& console;
+    std::unique_ptr<std::ofstream> file;
+    std::string filename;
+    bool writeToFile = false;
+    bool writeToConsole = true;
+
+    std::string Cp1125ToCp1251(const std::string& cp1125Text);
+    void SaveAsWindows1251(const std::stringstream& cp1125Text);
+    
+public:
+    StreamSplitter() : console(std::cout) {}
+    
+    void enableFileLogging(const std::string& filename);
+    
+    void disableFileLogging();
+
+    StreamSplitter& operator<<(StreamType);
+    
+    template<typename T>
+    StreamSplitter& operator<<(const T& value) {
+        if (writeToConsole)
+        {
+            console << value;
+        }
+        if (writeToFile && file && file->is_open()) {
+            std::stringstream ss;
+            ss << value;
+            SaveAsWindows1251(ss);
+        }
+        return *this;
+    }
+
+    StreamSplitter& operator<<(std::ostream& (*manip)(std::ostream&));
+};
+
 struct Problem
 {
 public:
-    Problem();
+    Problem() = default;
     virtual ~Problem() = default;
 
     virtual void solving_problem() = 0;
+
+    void set_output();
+    void init();
 protected:
     Ellipsoid ellipsoid;
     Way way;
-private:
-    void input_ellipsoid();
+    StreamSplitter out;
+
+    virtual void input_ellipsoid();
 };
 
 namespace ProblemMath

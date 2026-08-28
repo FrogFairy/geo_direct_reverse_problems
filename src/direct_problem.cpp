@@ -3,29 +3,40 @@
 #include <iostream>
 #include <cmath>
 
+void DirectProblem::input_ellipsoid()
+{
+    out << "Прямая задача." << std::endl;
+    Problem::input_ellipsoid();
+}
+
 void DirectProblem::input_data(DirectState& state) 
 {
     Degrees B1, L1, A1;
     double s;
     
-    std::cout << "Входные данные." << std::endl;
-    std::cout << "Введите широту (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): B1 = ";
+    out << "Входные данные." << std::endl;
+    out << "Введите широту (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): B1 = ";
     std::cin >> B1;
-    std::cout << "Введите долготу (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): L1 = ";
+    out << StreamType::FileOnly << B1 << std::endl << StreamType::Both;
+    out << "Введите долготу (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): L1 = ";
     std::cin >> L1;
-    std::cout << "Введите азимут (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): A1 = ";
+    out << StreamType::FileOnly << L1 << std::endl << StreamType::Both;
+    out << "Введите азимут (\"ГРАДУСЫ МИНУТЫ СЕКУНДЫ\"): A1 = ";
     std::cin >> A1;
-    std::cout << "Введите длину (м): s = ";
+    out << StreamType::FileOnly << A1 << std::endl << StreamType::Both;
+    out << "Введите длину (м): s = ";
     std::cin >> s;
+    out << StreamType::FileOnly << s << std::endl << StreamType::Both;
 
-    std::cout << "Выберите способ подсчета коэффициентов A, B и C." << std::endl;
-    std::cout << "0 - экономизация и отбрасывание незначительных коэффициентов (как у Морозова)" << std::endl;
-    std::cout << "1 - экономизация без отбрасывания" << std::endl;
-    std::cout << "2 - сумма ряда до 100 члена" << std::endl;
+    out << "Выберите способ подсчета коэффициентов A, B и C." << std::endl;
+    out << "0 - экономизация и отбрасывание незначительных коэффициентов (как у Морозова)" << std::endl;
+    out << "1 - экономизация без отбрасывания" << std::endl;
+    out << "2 - сумма ряда до 100 члена" << std::endl;
 
     int w;
-    std::cout << "Введите цифру от 0 до 2: ";
+    out << "Введите цифру от 0 до 2: ";
     std::cin >> w;
+    out << StreamType::FileOnly << w << std::endl << StreamType::Both;
     Way way = static_cast<Way>(w);
 
     Point point{to_radians(B1), to_radians(L1), to_radians(A1)};
@@ -128,58 +139,59 @@ void DirectProblem::calc_problem(DirectState& state)
 
 void DirectProblem::output_result(DirectState& state)
 {
-    std::cout << "Выходные данные." << std::endl;
-    std::cout << "W1 = " << state.W1 << std::endl;
-    std::cout << "sin(u1) = " << state.sin_u1 << std::endl;
-    std::cout << "cos(u1) = " << state.cos_u1 << std::endl;
-    std::cout << "sin(A1) = " << state.sin_A1 << std::endl;
-    std::cout << "cos(A1) = " << state.cos_A1 << std::endl;
-    std::cout << "sin(A0) = " << state.sin_A0 << std::endl;
-    std::cout << "(cos(A0))^2 = " << state.cos2_A0 << std::endl;
-    std::cout << "ctg(sigma1) = " << state.ctg_sigma1 << std::endl;
-    std::cout << "sin(2sigma1) = " << state.sin_2sigma1 << std::endl;
-    std::cout << "cos(2sigma1) = " << state.cos_2sigma1 << std::endl;
-    std::cout << "A = " << state.coeffs.A << std::endl;
-    std::cout << "B = " << state.coeffs.B << std::endl;
-    std::cout << "C = " << state.coeffs.C << std::endl;
+    out << "Выходные данные." << std::endl;
+    out << "W1 = " << state.W1 << std::endl;
+    out << "sin(u1) = " << state.sin_u1 << std::endl;
+    out << "cos(u1) = " << state.cos_u1 << std::endl;
+    out << "sin(A1) = " << state.sin_A1 << std::endl;
+    out << "cos(A1) = " << state.cos_A1 << std::endl;
+    out << "sin(A0) = " << state.sin_A0 << std::endl;
+    out << "(cos(A0))^2 = " << state.cos2_A0 << std::endl;
+    out << "ctg(sigma1) = " << state.ctg_sigma1 << std::endl;
+    out << "sin(2sigma1) = " << state.sin_2sigma1 << std::endl;
+    out << "cos(2sigma1) = " << state.cos_2sigma1 << std::endl;
+    out << "A = " << state.coeffs.A << std::endl;
+    out << "B = " << state.coeffs.B << std::endl;
+    out << "C = " << state.coeffs.C << std::endl;
 
-    std::cout << "alpha = " << to_seconds(state.alpha) << "''";
+    out << "alpha = " << to_seconds(state.alpha) << "''";
 #ifdef DEBUG
-    std::cout << " = " << state.alpha << " рад ";
+    out << " = " << state.alpha << " рад ";
 #endif
-    std::cout << std::endl;
+    out << std::endl;
 
-    std::cout << "beta = " << to_seconds(state.beta) << "''";
+    out << "beta = " << to_seconds(state.beta) << "''";
 #ifdef DEBUG
-    std::cout << " = " << state.beta << " рад ";
+    out << " = " << state.beta << " рад ";
 #endif
-    std::cout << std::endl;
+    out << std::endl;
 
-    std::cout << "sigma0 = " << state.sigma0 << std::endl;
-    std::cout << "sin(2(sigma1 + sigma0)) = " << state.sin_2sigma10 << std::endl;
-    std::cout << "cos(2(sigma1 + sigma0)) = " << state.cos_2sigma10 << std::endl;
-    std::cout << "sigma = " << state.sigma << std::endl;
+    out << "sigma0 = " << state.sigma0 << std::endl;
+    out << "sin(2(sigma1 + sigma0)) = " << state.sin_2sigma10 << std::endl;
+    out << "cos(2(sigma1 + sigma0)) = " << state.cos_2sigma10 << std::endl;
+    out << "sigma = " << state.sigma << std::endl;
 
-    std::cout << "delta = " << to_seconds(state.delta) << "''";
+    out << "delta = " << to_seconds(state.delta) << "''";
 #ifdef DEBUG
-    std::cout << " = " << state.delta << " рад ";
+    out << " = " << state.delta << " рад ";
 #endif
-    std::cout << std::endl;
+    out << std::endl;
 
-    std::cout << "sin(sigma) = " << state.sin_sigma << std::endl;
-    std::cout << "cos(sigma) = " << state.cos_sigma << std::endl;
+    out << "sin(sigma) = " << state.sin_sigma << std::endl;
+    out << "cos(sigma) = " << state.cos_sigma << std::endl;
 
-    std::cout << "lambda = " << to_degrees(state.lambda);
+    out << "lambda = " << to_degrees(state.lambda);
 #ifdef DEBUG
-    std::cout << " = " << state.lambda << " рад ";
+    out << " = " << state.lambda << " рад ";
 #endif
-    std::cout << std::endl;
+    out << std::endl;
 
 #ifdef DEBUG
-    std::cout << PointPrinter(state.point2, 2, true) << std::endl;
+    out << PointPrinter(state.point2, 2, true) << std::endl;
 #else
-    std::cout << PointPrinter(state.point2, 2) << std::endl;
+    out << PointPrinter(state.point2, 2) << std::endl;
 #endif
+    out << StreamType::FileOnly << std::endl << StreamType::Both;
 }
 
 void DirectProblem::solving_problem()

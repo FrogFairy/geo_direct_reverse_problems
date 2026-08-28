@@ -42,6 +42,8 @@ struct DirectProblem : Problem
 {
 public:
     void solving_problem() override;
+protected:
+    void input_ellipsoid() override;
 private:
     void input_data(DirectState&);
     void calc_problem(DirectState&);
