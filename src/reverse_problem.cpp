@@ -4,6 +4,7 @@
 #include <cmath>
 #include <vector>
 #include <utility>
+#include <algorithm>
 
 void ReverseProblem::input_ellipsoid()
 {
@@ -141,15 +142,15 @@ void ReverseProblem::calc_problem(ReverseState& state)
         state.delta.push_back((state.alpha.back() * state.sigma.back() -
                                 state.beta_.back() * state.x.back() * state.sin_sigma.back())
                                 * state.sin_A0.back());
-    } while (std::abs(to_seconds(state.delta.back()) - to_seconds(delta)) >= eps);
+    } while (std::abs(to_seconds(state.delta.back()) - to_seconds(delta)) >= eps &&
+            std::count(state.delta.begin(), state.delta.end(), state.delta.back()) < 2);
 
-    double cos2_A0 = 1 - std::pow(-0.705597732, 2);
+    double cos2_A0 = 1 - std::pow(state.sin_A0.back(), 2);
 
     Coefficients coeffs = ProblemMath::calc_coefficients(this->way, this->ellipsoid, cos2_A0);
     state.A = coeffs.A;
     state.B_ = 2 / cos2_A0 * coeffs.B;
     state.C_ = 2 / std::pow(cos2_A0, 2) * coeffs.C;
-    out << cos2_A0 << " " << coeffs.C << std::endl;
 
     state.y = (std::pow(cos2_A0, 2) - 2 * std::pow(state.x.back(), 2)) * state.cos_sigma.back();
     state.s = state.A * state.sigma.back() + (state.B_ * state.x.back() + state.C_ * state.y) * state.sin_sigma.back();
