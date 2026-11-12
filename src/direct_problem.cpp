@@ -5,7 +5,7 @@
 
 void DirectProblem::input_ellipsoid()
 {
-    out << "àï¬ ï § ¤ ç ." << std::endl;
+    out << "ÐŸÑ€ÑÐ¼Ð°Ñ Ð·Ð°Ð´Ð°Ñ‡Ð°." << std::endl;
     Problem::input_ellipsoid();
 }
 
@@ -14,27 +14,27 @@ void DirectProblem::input_data(DirectState& state)
     Degrees B1, L1, A1;
     double s;
     
-    out << "‚å®¤­ë¥ ¤ ­­ë¥." << std::endl;
-    out << "‚¢¥¤¨â¥ è¨à®âã (\"ƒ€„“‘› Œˆ“’› ‘…Š“„›\"): B1 = ";
+    out << "Ð’Ñ…Ð¾Ð´Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ." << std::endl;
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑˆÐ¸Ñ€Ð¾Ñ‚Ñƒ (\"Ð“Ð ÐÐ”Ð£Ð¡Ð« ÐœÐ˜ÐÐ£Ð¢Ð« Ð¡Ð•ÐšÐ£ÐÐ”Ð«\"): B1 = ";
     std::cin >> B1;
     out << StreamType::FileOnly << B1 << std::endl << StreamType::Both;
-    out << "‚¢¥¤¨â¥ ¤®«£®âã (\"ƒ€„“‘› Œˆ“’› ‘…Š“„›\"): L1 = ";
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð¾Ð»Ð³Ð¾Ñ‚Ñƒ (\"Ð“Ð ÐÐ”Ð£Ð¡Ð« ÐœÐ˜ÐÐ£Ð¢Ð« Ð¡Ð•ÐšÐ£ÐÐ”Ð«\"): L1 = ";
     std::cin >> L1;
     out << StreamType::FileOnly << L1 << std::endl << StreamType::Both;
-    out << "‚¢¥¤¨â¥  §¨¬ãâ (\"ƒ€„“‘› Œˆ“’› ‘…Š“„›\"): A1 = ";
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð°Ð·Ð¸Ð¼ÑƒÑ‚ (\"Ð“Ð ÐÐ”Ð£Ð¡Ð« ÐœÐ˜ÐÐ£Ð¢Ð« Ð¡Ð•ÐšÐ£ÐÐ”Ð«\"): A1 = ";
     std::cin >> A1;
     out << StreamType::FileOnly << A1 << std::endl << StreamType::Both;
-    out << "‚¢¥¤¨â¥ ¤«¨­ã (¬): s = ";
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð»Ð¸Ð½Ñƒ (Ð¼): s = ";
     std::cin >> s;
     out << StreamType::FileOnly << s << std::endl << StreamType::Both;
 
-    out << "‚ë¡¥à¨â¥ á¯®á®¡ ¯®¤áç¥â  ª®íää¨æ¨¥­â®¢ A, B ¨ C." << std::endl;
-    out << "0 - íª®­®¬¨§ æ¨ï ¨ ®â¡à áë¢ ­¨¥ ­¥§­ ç¨â¥«ì­ëå ª®íää¨æ¨¥­â®¢ (ª ª ã Œ®à®§®¢ )" << std::endl;
-    out << "1 - íª®­®¬¨§ æ¨ï ¡¥§ ®â¡à áë¢ ­¨ï" << std::endl;
-    out << "2 - áã¬¬  àï¤  ¤® 100 ç«¥­ " << std::endl;
+    out << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐ¿Ð¾ÑÐ¾Ð± Ð¿Ð¾Ð´ÑÑ‡ÐµÑ‚Ð° ÐºÐ¾ÑÑ„Ñ„Ð¸Ñ†Ð¸ÐµÐ½Ñ‚Ð¾Ð² A, B Ð¸ C." << std::endl;
+    out << "0 - ÑÐºÐ¾Ð½Ð¾Ð¼Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¸ Ð¾Ñ‚Ð±Ñ€Ð°ÑÑ‹Ð²Ð°Ð½Ð¸Ðµ Ð½ÐµÐ·Ð½Ð°Ñ‡Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… ÐºÐ¾ÑÑ„Ñ„Ð¸Ñ†Ð¸ÐµÐ½Ñ‚Ð¾Ð² (ÐºÐ°Ðº Ñƒ ÐœÐ¾Ñ€Ð¾Ð·Ð¾Ð²Ð°)" << std::endl;
+    out << "1 - ÑÐºÐ¾Ð½Ð¾Ð¼Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð±ÐµÐ· Ð¾Ñ‚Ð±Ñ€Ð°ÑÑ‹Ð²Ð°Ð½Ð¸Ñ" << std::endl;
+    // out << "2 - ÑÑƒÐ¼Ð¼Ð° Ñ€ÑÐ´Ð° Ð´Ð¾ 100 Ñ‡Ð»ÐµÐ½Ð°" << std::endl;
 
     int w;
-    out << "‚¢¥¤¨â¥ æ¨äàã ®â 0 ¤® 2: ";
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ†Ð¸Ñ„Ñ€Ñƒ 0 Ð¸Ð»Ð¸ 1: ";
     std::cin >> w;
     out << StreamType::FileOnly << w << std::endl << StreamType::Both;
     Way way = static_cast<Way>(w);
@@ -139,7 +139,7 @@ void DirectProblem::calc_problem(DirectState& state)
 
 void DirectProblem::output_result(DirectState& state)
 {
-    out << "‚ëå®¤­ë¥ ¤ ­­ë¥." << std::endl;
+    out << "Ð’Ñ‹Ñ…Ð¾Ð´Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ." << std::endl;
     out << "W1 = " << state.W1 << std::endl;
     out << "sin(u1) = " << state.sin_u1 << std::endl;
     out << "cos(u1) = " << state.cos_u1 << std::endl;
@@ -156,13 +156,13 @@ void DirectProblem::output_result(DirectState& state)
 
     out << "alpha = " << to_seconds(state.alpha) << "''";
 #ifdef DEBUG
-    out << " = " << state.alpha << " à ¤ ";
+    out << " = " << state.alpha << " Ñ€Ð°Ð´ ";
 #endif
     out << std::endl;
 
     out << "beta = " << to_seconds(state.beta) << "''";
 #ifdef DEBUG
-    out << " = " << state.beta << " à ¤ ";
+    out << " = " << state.beta << " Ñ€Ð°Ð´ ";
 #endif
     out << std::endl;
 
@@ -173,7 +173,7 @@ void DirectProblem::output_result(DirectState& state)
 
     out << "delta = " << to_seconds(state.delta) << "''";
 #ifdef DEBUG
-    out << " = " << state.delta << " à ¤ ";
+    out << " = " << state.delta << " Ñ€Ð°Ð´ ";
 #endif
     out << std::endl;
 
@@ -182,7 +182,7 @@ void DirectProblem::output_result(DirectState& state)
 
     out << "lambda = " << to_degrees(state.lambda);
 #ifdef DEBUG
-    out << " = " << state.lambda << " à ¤ ";
+    out << " = " << state.lambda << " Ñ€Ð°Ð´ ";
 #endif
     out << std::endl;
 

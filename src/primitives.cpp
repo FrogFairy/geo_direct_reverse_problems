@@ -60,9 +60,9 @@ std::ostream& operator<<(std::ostream& os, const PointPrinter& pp)
 {
     if (pp.show_radians)
     {
-        os << "B" << pp.index << " = " << to_degrees(pp.point->B) << " = " << pp.point->B << " ‡†§\n";
-        os << "L" << pp.index << " = " << to_degrees(pp.point->L) << " = " << pp.point->L << " ‡†§\n";
-        os << "A" << pp.index << " = " << to_degrees(pp.point->A) << " = " << pp.point->A << " ‡†§";
+        os << "B" << pp.index << " = " << to_degrees(pp.point->B) << " = " << pp.point->B << " —Ä–∞–¥\n";
+        os << "L" << pp.index << " = " << to_degrees(pp.point->L) << " = " << pp.point->L << " —Ä–∞–¥\n";
+        os << "A" << pp.index << " = " << to_degrees(pp.point->A) << " = " << pp.point->A << " —Ä–∞–¥";
     } else
     {
         os << "B" << pp.index << " = " << to_degrees(pp.point->B) << "\n";
@@ -134,14 +134,14 @@ std::vector<std::string> data_to_string(const std::vector<Degrees>& data)
 void Problem::input_ellipsoid()
 {
     double b, e2, e_2;
-    out << "è†‡†¨•‚‡Î Ì´´®Ø·Æ®§†." << std::endl;
-    out << "Ç¢•§®‚• ¨†´„Ó ØÆ´„Æ·Ï Ì´´®Ø·Æ®§† (¨): b = ";
+    out << "–ü–∞—Ä–∞–º–µ—Ç—Ä—ã —ç–ª–ª–∏–ø—Å–æ–∏–¥–∞." << std::endl;
+    out << "–í–≤–µ–¥–∏—Ç–µ –º–∞–ª—É—é –ø–æ–ª—É–æ—Å—å —ç–ª–ª–∏–ø—Å–æ–∏–¥–∞ (–º): b = ";
     std::cin >> b;
     out << StreamType::FileOnly << b << std::endl << StreamType::Both;
-    out << "Ç¢•§®‚• ™¢†§‡†‚ Ì™·Ê•≠‚‡®·®‚•‚†: e^2 = ";
+    out << "–í–≤–µ–¥–∏—Ç–µ –∫–≤–∞–¥—Ä–∞—Ç —ç–∫—Å—Ü–µ–Ω—Ç—Ä–∏—Å–∏—Ç–µ—Ç–∞: e^2 = ";
     std::cin >> e2;
     out << StreamType::FileOnly << e2 << std::endl << StreamType::Both;
-    out << "Ç¢•§®‚• ™¢†§‡†‚ ¢‚Æ‡Æ£Æ Ì™·Ê•≠‚‡®·®‚•‚†: (e')^2 = ";
+    out << "–í–≤–µ–¥–∏—Ç–µ –∫–≤–∞–¥—Ä–∞—Ç –≤—Ç–æ—Ä–æ–≥–æ —ç–∫—Å—Ü–µ–Ω—Ç—Ä–∏—Å–∏—Ç–µ—Ç–∞: (e')^2 = ";
     std::cin >> e_2;
     out << StreamType::FileOnly << e_2 << std::endl << StreamType::Both;
 
@@ -150,20 +150,20 @@ void Problem::input_ellipsoid()
 
 void Problem::set_output()
 {
-    std::cout << "ïÆ‚®‚• ß†Ø®·†‚Ï ‡•ß„´Ï‚†‚Î ¢ ‰†©´? y - §†, n - ≠•‚: ";
+    std::cout << "–•–æ—Ç–∏—Ç–µ –∑–∞–ø–∏—Å–∞—Ç—å —Ä–µ–∑—É–ª—å—Ç–∞—Ç—ã –≤ —Ñ–∞–π–ª? y - –¥–∞, n - –Ω–µ—Ç: ";
     std::string ans;
     std::cin >> ans;
 
     while (ans != "y" && ans != "n")
     {
-        std::cout << "ïÆ‚®‚• ß†Ø®·†‚Ï ‡•ß„´Ï‚†‚Î ¢ ‰†©´? y - §†, n - ≠•‚: ";
+        std::cout << "–•–æ—Ç–∏—Ç–µ –∑–∞–ø–∏—Å–∞—Ç—å —Ä–µ–∑—É–ª—å—Ç–∞—Ç—ã –≤ —Ñ–∞–π–ª? y - –¥–∞, n - –Ω–µ—Ç: ";
         std::cin >> ans;
     }
 
     if (ans == "y")
     {
         std::string filename;
-        std::cout << "Ç¢•§®‚• ≠†ß¢†≠®• ‰†©´†: ";
+        std::cout << "–í–≤–µ–¥–∏—Ç–µ –Ω–∞–∑–≤–∞–Ω–∏–µ —Ñ–∞–π–ª–∞: ";
         std::cin >> filename;
         out.enableFileLogging(filename);
     }
@@ -211,24 +211,24 @@ Coefficients ProblemMath::calc_coefficients_standart(const Ellipsoid& ellipsoid,
     return Coefficients{A, B, C};
 }
 
-Coefficients ProblemMath::calc_coefficients_accurate(const Ellipsoid& ellipsoid, double cos2_A0)
-{
-    double A = ellipsoid.b * (1 + 1.0 / 32 * 5 / 256 * std::pow(ellipsoid.e_2, 3)) +
-                ellipsoid.b * ellipsoid.e_2 / 4 *
-                (1 - 9.0 / 4 * 5 / 256 * std::pow(ellipsoid.e_2, 2)) * cos2_A0 +
-                ellipsoid.b * std::pow(ellipsoid.e_2, 2) * 3 / 64 *
-                (-1 + 5.0 / 8 * ellipsoid.e_2) * std::pow(cos2_A0, 2);
-    double B = ellipsoid.b * 1.0 / 32 * 15 / 1024 * std::pow(ellipsoid.e_2, 3) +
-                ellipsoid.b * ellipsoid.e_2 / 8 *
-                (1 - 9.0 / 2 * 15 / 1024 * std::pow(ellipsoid.e_2, 2)) * cos2_A0 +
-                ellipsoid.b * std::pow(ellipsoid.e_2, 2) / 32 *
-                (-1 + 3.0 / 64 * 15 * ellipsoid.e_2) * std::pow(cos2_A0, 2);
-    double C = -ellipsoid.b * 1.0 / 32 * 3 / 512 * std::pow(ellipsoid.e_2, 3) +
-                ellipsoid.b * std::pow(ellipsoid.e_2, 3) / 16 / 512 * 9 * 3 * cos2_A0 +
-                ellipsoid.b * std::pow(ellipsoid.e_2, 2) / 128 *
-                (1 - 3.0 / 8 * 3 * ellipsoid.e_2) * std::pow(cos2_A0, 2);
-    return Coefficients{A, B, C};
-}
+// Coefficients ProblemMath::calc_coefficients_accurate(const Ellipsoid& ellipsoid, double cos2_A0)
+// {
+//     double A = ellipsoid.b * (1 + 1.0 / 32 * 5 / 256 * std::pow(ellipsoid.e_2, 3)) +
+//                 ellipsoid.b * ellipsoid.e_2 / 4 *
+//                 (1 - 9.0 / 4 * 5 / 256 * std::pow(ellipsoid.e_2, 2)) * cos2_A0 +
+//                 ellipsoid.b * std::pow(ellipsoid.e_2, 2) * 3 / 64 *
+//                 (-1 + 5.0 / 8 * ellipsoid.e_2) * std::pow(cos2_A0, 2);
+//     double B = ellipsoid.b * 1.0 / 32 * 15 / 1024 * std::pow(ellipsoid.e_2, 3) +
+//                 ellipsoid.b * ellipsoid.e_2 / 8 *
+//                 (1 - 9.0 / 2 * 15 / 1024 * std::pow(ellipsoid.e_2, 2)) * cos2_A0 +
+//                 ellipsoid.b * std::pow(ellipsoid.e_2, 2) / 32 *
+//                 (-1 + 3.0 / 64 * 15 * ellipsoid.e_2) * std::pow(cos2_A0, 2);
+//     double C = -ellipsoid.b * 1.0 / 32 * 3 / 512 * std::pow(ellipsoid.e_2, 3) +
+//                 ellipsoid.b * std::pow(ellipsoid.e_2, 3) / 16 / 512 * 9 * 3 * cos2_A0 +
+//                 ellipsoid.b * std::pow(ellipsoid.e_2, 2) / 128 *
+//                 (1 - 3.0 / 8 * 3 * ellipsoid.e_2) * std::pow(cos2_A0, 2);
+//     return Coefficients{A, B, C};
+// }
 
 Coefficients ProblemMath::calc_coefficients(const Way& way, const Ellipsoid& ellipsoid, double cos2_A0)
 {
@@ -238,13 +238,13 @@ Coefficients ProblemMath::calc_coefficients(const Way& way, const Ellipsoid& ell
             return ProblemMath::calc_coefficients_simplified(ellipsoid, cos2_A0);
         case Standart:
             return ProblemMath::calc_coefficients_standart(ellipsoid, cos2_A0);
-        case Accurate:
-            return ProblemMath::calc_coefficients_accurate(ellipsoid, cos2_A0);
+        // case Accurate:
+        //     return ProblemMath::calc_coefficients_accurate(ellipsoid, cos2_A0);
     }
     return Coefficients{0, 0, 0};
 }
 
-// äéëíõãú Ñãü èÖêÖÇéÑÄ Ç 1251
+// –ü–ï–†–ï–í–û–î –í 1251
 std::string StreamSplitter::Cp1125ToCp1251(const std::string& cp1125Text) {
     int wideSize = MultiByteToWideChar(866, 0, cp1125Text.c_str(), -1, nullptr, 0);
     if (wideSize <= 0) return "";
@@ -263,7 +263,7 @@ std::string StreamSplitter::Cp1125ToCp1251(const std::string& cp1125Text) {
     return result;
 }
 
-// äéëíõãú Ñãü èÖêÖÇéÑÄ Ç 1251
+// –ü–ï–†–ï–í–û–î –í 1251
 void StreamSplitter::SaveAsWindows1251(const std::stringstream& cp1125Text) {
     std::string s = cp1125Text.str();
     std::string cp1251Text = Cp1125ToCp1251(s);
@@ -276,18 +276,18 @@ void StreamSplitter::enableFileLogging(const std::string& filename) {
         writeToFile = true;
         this->filename = filename;
     } else {
-        std::cout << "éË®°™† Ø‡® Æ‚™‡Î‚®® ‰†©´†: " << filename << std::endl;
+        std::cout << "–û—à–∏–±–∫–∞ –ø—Ä–∏ –æ—Ç–∫—Ä—ã—Ç–∏–∏ —Ñ–∞–π–ª–∞: " << filename << std::endl;
     }
 }
 
-void StreamSplitter::disableFileLogging() {
-    if (file && file->is_open()) {
-        file->flush();
-        file->close();
-    }
-    file.reset();
-    writeToFile = false;
-}
+// void StreamSplitter::disableFileLogging() {
+//     if (file && file->is_open()) {
+//         file->flush();
+//         file->close();
+//     }
+//     file.reset();
+//     writeToFile = false;
+// }
 
 StreamSplitter& StreamSplitter::operator<<(StreamType stream_type) {
     writeToConsole = stream_type == StreamType::FileOnly ? false : true;

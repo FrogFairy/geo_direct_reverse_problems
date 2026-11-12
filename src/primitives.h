@@ -44,7 +44,7 @@ enum Way
 {
     Simplified = 0,
     Standart = 1,
-    Accurate = 2
+    // Accurate = 2
 };
 
 struct Coefficients
@@ -77,7 +77,7 @@ public:
     
     void enableFileLogging(const std::string& filename);
     
-    void disableFileLogging();
+    // void disableFileLogging();
 
     StreamSplitter& operator<<(StreamType);
     
@@ -121,7 +121,7 @@ namespace ProblemMath
     Coefficients calc_coefficients(const Way& way, const Ellipsoid& ellipsoid, double cos2_A0);
     Coefficients calc_coefficients_simplified(const Ellipsoid& ellipsoid, double cos2_A0);
     Coefficients calc_coefficients_standart(const Ellipsoid& ellipsoid, double cos2_A0);
-    Coefficients calc_coefficients_accurate(const Ellipsoid& ellipsoid, double cos2_A0);
+    // Coefficients calc_coefficients_accurate(const Ellipsoid& ellipsoid, double cos2_A0);
 };
 
 double to_radians(Degrees);

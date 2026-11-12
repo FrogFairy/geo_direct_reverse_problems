@@ -7,10 +7,10 @@
 
 void help()
 {
-    std::cout << "„®áâã¯­ë¥ ª®¬ ­¤ë: \\help" << std::endl;
-    std::cout << "àï¬ ï § ¤ ç : \\direct" << std::endl;
-    std::cout << "Ž¡à â­ ï § ¤ ç : \\reverse" << std::endl;
-    std::cout << "‚ëå®¤: \\quit" << std::endl;
+    std::cout << "Ð”Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹: \\help" << std::endl;
+    std::cout << "ÐŸÑ€ÑÐ¼Ð°Ñ Ð·Ð°Ð´Ð°Ñ‡Ð°: \\direct" << std::endl;
+    std::cout << "ÐžÐ±Ñ€Ð°Ñ‚Ð½Ð°Ñ Ð·Ð°Ð´Ð°Ñ‡Ð°: \\reverse" << std::endl;
+    std::cout << "Ð’Ñ‹Ñ…Ð¾Ð´: \\quit" << std::endl;
 }
 
 int main()

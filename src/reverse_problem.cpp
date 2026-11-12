@@ -8,7 +8,7 @@
 
 void ReverseProblem::input_ellipsoid()
 {
-    out << "Ž¡à â­ ï § ¤ ç ." << std::endl;
+    out << "ÐžÐ±Ñ€Ð°Ñ‚Ð½Ð°Ñ Ð·Ð°Ð´Ð°Ñ‡Ð°." << std::endl;
     Problem::input_ellipsoid();
 }
 
@@ -16,28 +16,28 @@ void ReverseProblem::input_data(ReverseState& state)
 {
     Degrees B1, B2, L1, L2;
     
-    out << "Ž¡à â­ ï § ¤ ç ." << std::endl;
-    out << "‚å®¤­ë¥ ¤ ­­ë¥." << std::endl;
-    out << "‚¢¥¤¨â¥ è¨à®âã ­ ç «ì­®© â®çª¨ (\"ƒ€„“‘› Œˆ“’› ‘…Š“„›\"): B1 = ";
+    out << "ÐžÐ±Ñ€Ð°Ñ‚Ð½Ð°Ñ Ð·Ð°Ð´Ð°Ñ‡Ð°." << std::endl;
+    out << "Ð’Ñ…Ð¾Ð´Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ." << std::endl;
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑˆÐ¸Ñ€Ð¾Ñ‚Ñƒ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð¾Ð¹ Ñ‚Ð¾Ñ‡ÐºÐ¸ (\"Ð“Ð ÐÐ”Ð£Ð¡Ð« ÐœÐ˜ÐÐ£Ð¢Ð« Ð¡Ð•ÐšÐ£ÐÐ”Ð«\"): B1 = ";
     std::cin >> B1;
     out << StreamType::FileOnly << B1 << std::endl << StreamType::Both;
-    out << "‚¢¥¤¨â¥ è¨à®âã ª®­¥ç­®© â®çª¨ (\"ƒ€„“‘› Œˆ“’› ‘…Š“„›\"): B2 = ";
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑˆÐ¸Ñ€Ð¾Ñ‚Ñƒ ÐºÐ¾Ð½ÐµÑ‡Ð½Ð¾Ð¹ Ñ‚Ð¾Ñ‡ÐºÐ¸ (\"Ð“Ð ÐÐ”Ð£Ð¡Ð« ÐœÐ˜ÐÐ£Ð¢Ð« Ð¡Ð•ÐšÐ£ÐÐ”Ð«\"): B2 = ";
     std::cin >> B2;
     out << StreamType::FileOnly << B2 << std::endl << StreamType::Both;
-    out << "‚¢¥¤¨â¥ ¤®«£®âã ­ ç «ì­®© â®çª¨ (\"ƒ€„“‘› Œˆ“’› ‘…Š“„›\"): L1 = ";
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð¾Ð»Ð³Ð¾Ñ‚Ñƒ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð¾Ð¹ Ñ‚Ð¾Ñ‡ÐºÐ¸ (\"Ð“Ð ÐÐ”Ð£Ð¡Ð« ÐœÐ˜ÐÐ£Ð¢Ð« Ð¡Ð•ÐšÐ£ÐÐ”Ð«\"): L1 = ";
     std::cin >> L1;
     out << StreamType::FileOnly << L1 << std::endl << StreamType::Both;
-    out << "‚¢¥¤¨â¥ ¤®«£®âã ª®­¥ç­®© â®çª¨ (\"ƒ€„“‘› Œˆ“’› ‘…Š“„›\"): L2 = ";
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð¾Ð»Ð³Ð¾Ñ‚Ñƒ ÐºÐ¾Ð½ÐµÑ‡Ð½Ð¾Ð¹ Ñ‚Ð¾Ñ‡ÐºÐ¸ (\"Ð“Ð ÐÐ”Ð£Ð¡Ð« ÐœÐ˜ÐÐ£Ð¢Ð« Ð¡Ð•ÐšÐ£ÐÐ”Ð«\"): L2 = ";
     std::cin >> L2;
     out << StreamType::FileOnly << L2 << std::endl << StreamType::Both;
 
-    out << "‚ë¡¥à¨â¥ á¯®á®¡ ¯®¤áç¥â  ª®íää¨æ¨¥­â®¢ A, B ¨ C." << std::endl;
-    out << "0 - íª®­®¬¨§ æ¨ï ¨ ®â¡à áë¢ ­¨¥ ­¥§­ ç¨â¥«ì­ëå ª®íää¨æ¨¥­â®¢ (ª ª ã Œ®à®§®¢ )" << std::endl;
-    out << "1 - íª®­®¬¨§ æ¨ï ¡¥§ ®â¡à áë¢ ­¨ï" << std::endl;
-    out << "2 - áã¬¬  àï¤  ¤® 100 ç«¥­ " << std::endl;
+    out << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÑÐ¿Ð¾ÑÐ¾Ð± Ð¿Ð¾Ð´ÑÑ‡ÐµÑ‚Ð° ÐºÐ¾ÑÑ„Ñ„Ð¸Ñ†Ð¸ÐµÐ½Ñ‚Ð¾Ð² A, B Ð¸ C." << std::endl;
+    out << "0 - ÑÐºÐ¾Ð½Ð¾Ð¼Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¸ Ð¾Ñ‚Ð±Ñ€Ð°ÑÑ‹Ð²Ð°Ð½Ð¸Ðµ Ð½ÐµÐ·Ð½Ð°Ñ‡Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… ÐºÐ¾ÑÑ„Ñ„Ð¸Ñ†Ð¸ÐµÐ½Ñ‚Ð¾Ð² (ÐºÐ°Ðº Ñƒ ÐœÐ¾Ñ€Ð¾Ð·Ð¾Ð²Ð°)" << std::endl;
+    out << "1 - ÑÐºÐ¾Ð½Ð¾Ð¼Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð±ÐµÐ· Ð¾Ñ‚Ð±Ñ€Ð°ÑÑ‹Ð²Ð°Ð½Ð¸Ñ" << std::endl;
+    // out << "2 - ÑÑƒÐ¼Ð¼Ð° Ñ€ÑÐ´Ð° Ð´Ð¾ 100 Ñ‡Ð»ÐµÐ½Ð°" << std::endl;
 
     int w;
-    out << "‚¢¥¤¨â¥ æ¨äàã ®â 0 ¤® 2: ";
+    out << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ†Ð¸Ñ„Ñ€Ñƒ Ð¾Ñ‚ 0 Ð´Ð¾ 1: ";
     std::cin >> w;
     out << StreamType::FileOnly << w << std::endl << StreamType::Both;
     Way way = static_cast<Way>(w);
@@ -181,8 +181,8 @@ void ReverseProblem::calc_problem(ReverseState& state)
 
 void ReverseProblem::output_header(int size_col, int num_cols)
 {
-    out << alignment("‚¥«¨ç¨­ ", size_col, '<') << "|"
-                << alignment("à¨¡«¨¦¥­¨ï", size_col * num_cols + num_cols - 1) << "|" << std::endl;
+    out << alignment("Ð’ÐµÐ»Ð¸Ñ‡Ð¸Ð½Ð°", size_col, '<') << "|"
+                << alignment("ÐŸÑ€Ð¸Ð±Ð»Ð¸Ð¶ÐµÐ½Ð¸Ñ", size_col * num_cols + num_cols - 1) << "|" << std::endl;
     out << std::string(size_col + 1 + size_col * num_cols + num_cols, '-') << std::endl;
     out << std::string(size_col, ' ') << "|";
     for (int i = 1; i <= num_cols; ++i)
@@ -206,7 +206,7 @@ void ReverseProblem::output_row(const std::string& name, const std::vector<std::
 
 void ReverseProblem::output_result(ReverseState& state)
 {
-    out << "‚ëå®¤­ë¥ ¤ ­­ë¥." << std::endl;
+    out << "Ð’Ñ‹Ñ…Ð¾Ð´Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ." << std::endl;
     out << "l = " << state.l << std::endl;
     out << "sin(u1) = " << state.sin_u1 << std::endl;
     out << "cos(u1) = " << state.cos_u1 << std::endl;
@@ -256,7 +256,7 @@ void ReverseProblem::output_result(ReverseState& state)
     out << "s = " << state.s << std::endl;
     out << "A2 = " << to_degrees(state.A2);
 #ifdef DEBUG
-    out << " = " << state.A2 << " à ¤ ";
+    out << " = " << state.A2 << " Ñ€Ð°Ð´ ";
 #endif
     out << std::endl;
     out << StreamType::FileOnly << std::endl << StreamType::Both;
